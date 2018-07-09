@@ -1,36 +1,55 @@
-let Modal = (function() {
-    let trigger = $qsa('.modal__trigger'); // what you click to activate the modal
-    let modals = $qsa('.modal'); // the entire modal (takes up entire window)
-    let modalsbg = $qsa('.modal__bg'); // the entire modal (takes up entire window)
-    let content = $qsa('.modal__content'); // the inner content of the modal
-    let closers = $qsa('.modal__close'); // an element used to close the modal
-    let w = window;
-    let isOpen = false;
-    let contentDelay = 400; // duration after you click the button and wait for the content to show
-    let len = trigger.length;
+var PopapYoutube = (function () {
+
+    var modalContent = '<div id="modal" class="modal modal__bg" role="dialog" aria-hidden="true">' +
+        '<div class="modal__dialog">' +
+        '<div class="modal__content">' +
+        '<div><iframe src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen id="modal__player"></iframe></div>' +
+        '<a href="" class="modal__close demo-close">\n' +
+        '<svg class="" viewBox="0 0 24 24"><path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"/><path d="M0 0h24v24h-24z" fill="none"/></svg>\n' +
+        '</a></div></div></div>';
+    var modal = document.createElement('section');
+    modal.innerHTML = modalContent;
+
+
+    function playVideo(videoId)
+    {
+        let href = 'https://www.youtube.com/embed/' + videoId;
+        var modal_player = document.getElementById('modal__player');
+        modal_player.attributes.src = href;
+    }
+
+    var trigger = $qsa('.modal__trigger'); // what you click to activate the modal
+    var modals = $qsa('.modal'); // the entire modal (takes up entire window)
+    var modalsbg = $qsa('.modal__bg'); // the entire modal (takes up entire window)
+    var content = $qsa('.modal__content'); // the inner content of the modal
+    var closers = $qsa('.modal__close'); // an element used to close the modal
+    var w = window;
+    var isOpen = false;
+    var contentDelay = 400; // duration after you click the button and wait for the content to show
+    var len = trigger.length;
 
     // make it easier for yourself by not having to type as much to select an element
     function $qsa(el) {
         return document.querySelectorAll(el);
     }
 
-    let getId = function(event) {
+    var getId = function (event) {
         event.preventDefault();
-        let self = this;
+        var self = this;
         // get the value of the data-modal attribute from the button
-        let modalId = self.dataset.modal;
-        let len = modalId.length;
+        var modalId = self.dataset.modal;
+        var len = modalId.length;
         // remove the '#' from the string
-        let modalIdTrimmed = modalId.substring(1, len);
+        var modalIdTrimmed = modalId.substring(1, len);
         // select the modal we want to activate
-        let modal = document.getElementById(modalIdTrimmed);
+        var modal = document.getElementById(modalIdTrimmed);
         // execute function that creates the temporary expanding div
         makeDiv(self, modal);
     };
 
-    let makeDiv = function(self, modal) {
+    var makeDiv = function (self, modal) {
 
-        let fakediv = document.getElementById('modal__temp');
+        var fakediv = document.getElementById('modal__temp');
 
         /**
          * if there isn't a 'fakediv', create one and append it to the button that was
@@ -38,20 +57,20 @@ let Modal = (function() {
          */
 
         if (fakediv === null) {
-            let div = document.createElement('div');
+            var div = document.createElement('div');
             div.id = 'modal__temp';
             self.appendChild(div);
             moveTrig(self, modal, div);
         }
     };
 
-    let moveTrig = function(trig, modal, div) {
-        let trigProps = trig.getBoundingClientRect();
-        let m = modal;
-        let mProps = m.querySelector('.modal__content').getBoundingClientRect();
-        let transX, transY, scaleX, scaleY;
-        let xc = w.innerWidth / 2;
-        let yc = w.innerHeight / 2;
+    var moveTrig = function (trig, modal, div) {
+        var trigProps = trig.getBoundingClientRect();
+        var m = modal;
+        var mProps = m.querySelector('.modal__content').getBoundingClientRect();
+        var transX, transY, scaleX, scaleY;
+        var xc = w.innerWidth / 2;
+        var yc = w.innerHeight / 2;
 
         // this class increases z-index value so the button goes overtop the other buttons
         trig.classList.add('modal__trigger--active');
@@ -82,19 +101,19 @@ let Modal = (function() {
         div.style.webkitTransform = 'scale(' + scaleX + ',' + scaleY + ')';
 
 
-        window.setTimeout(function() {
-            window.requestAnimationFrame(function() {
+        window.setTimeout(function () {
+            window.requestAnimationFrame(function () {
                 open(m, div);
             });
         }, contentDelay);
 
     };
 
-    let open = function(m, div) {
+    var open = function (m, div) {
 
         if (!isOpen) {
             // select the content inside the modal
-            let content = m.querySelector('.modal__content');
+            var content = m.querySelector('.modal__content');
             // reveal the modal
             m.classList.add('modal--active');
             // reveal the modal content
@@ -118,13 +137,13 @@ let Modal = (function() {
         }
     };
 
-    let close = function(event) {
+    var close = function (event) {
 
         event.preventDefault();
         event.stopImmediatePropagation();
 
-        let target = event.target;
-        let div = document.getElementById('modal__temp');
+        var target = event.target;
+        var div = document.getElementById('modal__temp');
 
         /**
          * make sure the modal__bg or modal__close was clicked, we don't want to be able to click
@@ -142,7 +161,7 @@ let Modal = (function() {
              * remove the inline css from the trigger to move it back into its original position.
              */
 
-            for (let i = 0; i < len; i++) {
+            for (var i = 0; i < len; i++) {
                 modals[i].classList.remove('modal--active');
                 content[i].classList.remove('modal__content--active');
                 trigger[i].style.transform = 'none';
@@ -158,8 +177,8 @@ let Modal = (function() {
         }
 
         function removeDiv() {
-            setTimeout(function() {
-                window.requestAnimationFrame(function() {
+            setTimeout(function () {
+                window.requestAnimationFrame(function () {
                     // remove the temp div from the dom with a slight delay so the animation looks good
                     div.remove();
                 });
@@ -168,15 +187,15 @@ let Modal = (function() {
 
     };
 
-    let bindActions = function() {
-        for (let i = 0; i < len; i++) {
+    var bindActions = function () {
+        for (var i = 0; i < len; i++) {
             trigger[i].addEventListener('click', getId, false);
             closers[i].addEventListener('click', close, false);
             modalsbg[i].addEventListener('click', close, false);
         }
     };
 
-    let init = function() {
+    var init = function () {
         bindActions();
     };
 
@@ -186,4 +205,4 @@ let Modal = (function() {
 
 }());
 
-Modal.init();
+PopapYoutube.init();
