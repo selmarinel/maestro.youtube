@@ -1,0 +1,136 @@
+.__maestro_button {
+    font-size: 15px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: .25rem
+}
+
+.__maestro_button_inner {
+    visibility: hidden;
+    cursor: default;
+    padding-left: 1px;
+    padding-top: 0;
+    float: left;
+    line-height: 12px;
+    margin: 0 auto;
+    display: block
+}
+
+.__maestro_button:hover .__maestro_button_inner {
+    visibility: visible
+}
+
+/*close*/
+.__maestro__close {
+    background: #ff5c5c;
+    border: 1px solid #e33e41;
+}
+
+.__maestro__close:active {
+    background: #c14645;
+    border: 1px solid #b03537
+}
+
+.__maestro__close:active .__maestro__close__button {
+    color: #4e0002
+}
+
+.__maestro__close__button {
+    color: #820005;
+}
+
+/*full screen*/
+.__maestro__full_screen {
+    background: #00ca56;
+    border: 1px solid #14ae46;
+}
+
+.__maestro__full_screen:active {
+    background: #029740;
+    border: 1px solid #128435
+}
+
+.__maestro__full_screen:active .__maestro__full_screen__button {
+    color: #003107
+}
+
+.__maestro__full_screen__button {
+    color: #006519;
+}
+
+/*minimize_screen*/
+.__maestro__minimize_screen {
+    background: #ffbd4c;
+    border: 1px solid #e09e3e;
+}
+
+.__maestro__minimize_screen:active {
+    background: #c08e38;
+    border: 1px solid #af7c33
+}
+
+.__maestro__minimize_screen:active .__maestro__minimize_screen__button {
+    color: #5a2607
+}
+
+.__maestro__minimize_screen__button {
+    color: #9a5518;
+}
+
+/*base */
+.__maestro__full #__modal__player {
+    width: 100vw !important;
+    height: 95vh !important;
+}
+
+.__maestro__minimize {
+    bottom: 0 !important;
+    left: 0 !important;
+    top: inherit !important;
+    transform: translate(0, 0);
+    height: 0 !important;
+    width: 150px !important;
+}
+.__maestro__minimize #__modal__player{
+    width: 0;
+    height: 0;
+}
+
+.__maestro__modal__section {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(52, 73, 94, .8);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear .25s, opacity .25s 0s, transform .25s
+}
+
+.__maestro__modal__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ecf0f1;
+    padding: 0;
+    width: auto;
+    border-radius: .25rem
+}
+
+#__modal__player {
+    width: 45vw;
+    height: 45vh;
+    transition: .2s;
+}
+
+.__maestro__toggle {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    transition: visibility 0s linear 0s, opacity .25s 0s, transform .25s
+}
