@@ -4,18 +4,61 @@
     <meta charset="UTF-8">
     <title>Maestro Youtube</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <style>
+        #main {
+            padding-top: 5px;
+        }
+
+        ._m_h1 {
+            color: #8e44ad;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        ._m_h1 span {
+            color: #ecf0f1;
+            display: inline-block;
+            background-color: #27ae60;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-<section class="container">
+<section class="container" id="main">
     <div class="row">
         <div class="col">
-            <button type="button" class="btn btn-primary __modal_trigger" maestro-youtube-id='dQw4w9WgXcQ'>
-                Show me 1st video
-            </button>
+            <h1 class="_m_h1">MAESTRO <span>YOUTUBE</span></h1>
         </div>
+    </div>
+    <div class="row">
         <div class="col">
-            <button type="button" class="btn btn-primary __modal_trigger" maestro-youtube-id='djV11Xbc914'>
-                Show me 2st video
+            <h2>How to use?</h2>
+            <p>
+                For use this library you need to include in js section our script
+            </p>
+            <em>
+                <code>
+                    &lt;script src="./dist/maestro.youtube.min.js"&gt;&lt;/script&gt;
+                </code>
+            </em>
+            <h2>What's next?</h2>
+            <p>
+                For add link to popup with youtube video, you need just add <code>__modal_trigger</code> class
+                to trigger DOMElement and <code>maestro-youtube-id</code> attribute with youtube video id. <br/>
+                <strong>That's all!</strong>
+            </p>
+            <h3>Example</h3>
+            <code>
+                &lt;button class='__modal_trigger' maestro-youtube-id='dQw4w9WgXcQ'&gt;<br/>&nbsp;&nbsp;open<br/>&lt;/button&gt;
+            </code>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>Just Try!</h3>
+            <button type="button" class="__modal_trigger" maestro-youtube-id='dQw4w9WgXcQ'>
+                open
             </button>
         </div>
     </div>
