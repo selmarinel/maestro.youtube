@@ -79,7 +79,7 @@ class __MaestroModal {
             '.__maestro__modal__section{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(52,73,94,.8);opacity:0;visibility:hidden;transform:scale(1.1);transition:visibility 0s linear .25s,opacity .25s 0s,transform .25s}' +
             '.__maestro__modal__content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background-color:#ecf0f1;padding:0;width:auto;border-radius:.25rem}' +
             '#__modal__player{width:45vw;height:45vh;transition:.2s}' +
-            '.__maestro__toggle{opacity:1;visibility:visible;transform:scale(1);transition:visibility 0s linear 0s,opacity .25s 0s,transform .25s}' +
+            '.__maestro__toggle{z-index: 99999;opacity:1;visibility:visible;transform:scale(1);transition:visibility 0s linear 0s,opacity .25s 0s,transform .25s}' +
             '@media (max-width: 992px) {#__modal__player{width: 65vw;}}' +
             '@media (max-width: 768px) {#__modal__player{width: 75vw;}}' +
             '@media (max-width: 576px) {#__modal__player{width: 95vw;}}' +
