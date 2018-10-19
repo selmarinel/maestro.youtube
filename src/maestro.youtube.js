@@ -3,7 +3,29 @@
 class __MaestroModal {
 
     constructor() {
+        this.downloadDomain = '';
         this.render();
+    }
+
+    renderDownloadBlock(videoId) {
+        if (this.downloadDomain) {
+
+            let element = document.createElement('span');
+            element.className = '__maestro__button__download';
+            element.setAttribute('id', '__modal__download__button');
+            element.innerHTML = 'Download MP3';
+
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.id === '__modal__download__button') {
+                    console.log(videoId)
+                }
+            });
+
+            let panel = document.getElementById('__maestro_control_panel');
+            panel.appendChild(element);
+            // panel.appendChild($content);
+        }
+        return '';
     }
 
     toggleModal(event) {
@@ -13,7 +35,8 @@ class __MaestroModal {
             __iframe = document.getElementById('__modal__player');
 
         __modal.classList.toggle("__maestro__toggle");
-        __iframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId)
+        __iframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId);
+        return videoId;
     }
 
     fullScreen() {
@@ -31,16 +54,23 @@ class __MaestroModal {
     windowOnClick(event) {
         let modal = document.getElementById('__modal__section');
         if (event.target === modal) {
-            self.toggleModal();
+            this.toggleModal(event);
         }
     }
 
     init() {
         let self = this;
         this.triggers = document.querySelectorAll('.__modal_trigger');
-        window.addEventListener('click', self.windowOnClick);
+
+        window.addEventListener('click', function (event) {
+            self.windowOnClick(event);
+        });
+
         for (var i = 0; i < this.triggers.length; i++) {
-            this.triggers[i].addEventListener('click', self.toggleModal);
+            this.triggers[i].addEventListener('click', function (event) {
+                let videoId = self.toggleModal(event);
+                self.renderDownloadBlock(videoId);
+            });
         }
 
         this.closeButton = document.querySelector(".__maestro__close__button");
@@ -53,7 +83,6 @@ class __MaestroModal {
         this.minimizeScreenButton = document.querySelector(".__maestro__minimize_screen");
         this.minimizeScreenButton.addEventListener("click", self.minimize);
     }
-
 
     render() {
         let style = document.createElement('style');
@@ -73,7 +102,7 @@ class __MaestroModal {
             '.__maestro__minimize_screen:active{background:#c08e38;border:1px solid #af7c33}' +
             '.__maestro__minimize_screen:active .__maestro__minimize_screen__button{color:#5a2607}' +
             '.__maestro__minimize_screen__button{color:#9a5518}' +
-            '.__maestro__full #__modal__player{width:100vw!important;height:95vh!important}' +
+            '.__maestro__full #__modal__player{width:99vw!important;height:90vh!important}' +
             '.__maestro__minimize{bottom:0!important;left:0!important;top:inherit!important;transform:translate(0,0);height:0!important;width:150px!important}' +
             '.__maestro__minimize #__modal__player{width:0;height:0}' +
             '.__maestro__modal__section{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(52,73,94,.8);opacity:0;visibility:hidden;transform:scale(1.1);transition:visibility 0s linear .25s,opacity .25s 0s,transform .25s}' +
@@ -83,6 +112,9 @@ class __MaestroModal {
             '@media (max-width: 992px) {#__modal__player{width: 65vw;}}' +
             '@media (max-width: 768px) {#__modal__player{width: 75vw;}}' +
             '@media (max-width: 576px) {#__modal__player{width: 95vw;}}' +
+            '#__maestro_control_panel{display: flex;}' +
+            '.__maestro__button__download {font-size: 15px;padding: 5px 10px;background: #adadad;border: 1px solid #9c9c9c;transition: .5s;display: block;width: auto;margin: -5px auto 5px;}' +
+            '.__maestro__button__download:hover {box-shadow: #8c8c8c 0 0 5px;}' +
             '';
         document.getElementsByTagName('head')[0].appendChild(style);
 
@@ -91,12 +123,18 @@ class __MaestroModal {
             '<span class="__maestro_button __maestro__close"><span class="__maestro_button_inner __maestro__close__button">&times;</span></span>' +
             '<span class="__maestro_button __maestro__minimize_screen"><span class="__maestro_button_inner __maestro__minimize_screen__button">&ndash;</span></span>' +
             '<span class="__maestro_button __maestro__full_screen"><span class="__maestro_button_inner __maestro__full_screen__button">+</span></span>' +
-            '<div><iframe src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen' +
-            ' id="__modal__player"></iframe></div>' +
+            '<div>' +
+            '<iframe src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen id="__modal__player"></iframe>' +
+            '<div id="__maestro_control_panel"></div>' +
+            '</div>' +
             '</modal>' +
             '</section>');
         return this;
     }
 }
 
-new __MaestroModal().init();
+function __m() {
+    let MaestroModal = new __MaestroModal();
+    MaestroModal.init();
+    return MaestroModal;
+}
