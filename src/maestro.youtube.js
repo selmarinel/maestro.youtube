@@ -20,8 +20,12 @@ class __MaestroModal {
 
     renderDownloadBlock(videoId) {
         let self = this;
-        if (this.downloadDomain) {
 
+        if (document.getElementById('__modal__download__button')) {
+            return '';
+        }
+
+        if (this.downloadDomain) {
             let element = document.createElement('span');
             element.className = '__maestro__button__download';
             element.setAttribute('id', '__modal__download__button');
