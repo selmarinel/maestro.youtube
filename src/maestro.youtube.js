@@ -3,27 +3,43 @@
 class __MaestroModal {
 
     constructor() {
-        this.downloadDomain = '';
+        this.downloadDomain = 'https://download-youtube.top/?url=https://www.youtube.com/watch?v=';
+        this.downloadText = 'Download MP3';
         this.render();
+
+        this.config();
+    }
+
+    config(config = {
+        'downloadDomain': 'https://download-youtube.top/?url=https://www.youtube.com/watch?v=',
+        'downloadText': 'Download MP3'
+    }) {
+        this.downloadDomain = config.downloadDomain;
+        this.downloadText = config.downloadText;
     }
 
     renderDownloadBlock(videoId) {
+        let self = this;
         if (this.downloadDomain) {
 
             let element = document.createElement('span');
             element.className = '__maestro__button__download';
             element.setAttribute('id', '__modal__download__button');
-            element.innerHTML = 'Download MP3';
+            element.innerHTML = this.downloadText;
 
             document.addEventListener('click', function (e) {
                 if (e.target && e.target.id === '__modal__download__button') {
-                    console.log(videoId)
+                    let downloadUrl = self.downloadDomain + videoId;
+                    window.open(
+                        downloadUrl,
+                        '',
+                        'width=450,height=500,toolbar=no,top=100,left=40') ||
+                    (window.location = downloadUrl);
                 }
             });
 
             let panel = document.getElementById('__maestro_control_panel');
             panel.appendChild(element);
-            // panel.appendChild($content);
         }
         return '';
     }
@@ -113,7 +129,7 @@ class __MaestroModal {
             '@media (max-width: 768px) {#__modal__player{width: 75vw;}}' +
             '@media (max-width: 576px) {#__modal__player{width: 95vw;}}' +
             '#__maestro_control_panel{display: flex;}' +
-            '.__maestro__button__download {font-size: 15px;padding: 5px 10px;background: #adadad;border: 1px solid #9c9c9c;transition: .5s;display: block;width: auto;margin: -5px auto 5px;}' +
+            '.__maestro__button__download {cursor:pointer;font-size: 15px;padding: 5px 10px;background: #adadad;border: 1px solid #9c9c9c;transition: .5s;display: block;width: auto;margin: -5px auto 5px;}' +
             '.__maestro__button__download:hover {box-shadow: #8c8c8c 0 0 5px;}' +
             '';
         document.getElementsByTagName('head')[0].appendChild(style);
