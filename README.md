@@ -11,7 +11,7 @@ Make your own popup with youtube video
 >For add link to popup with youtube video, you need just add __modal_trigger class to trigger DOMElement and maestro-youtube-id attribute with youtube video id. 
 ##That's all!
 
-####Example
+####Example:
 ```
 <button class='__modal_trigger' maestro-youtube-id='dQw4w9WgXcQ'>
   open
